@@ -5,12 +5,13 @@
 	import '@skeletonlabs/skeleton/styles/all.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
+	import 'iconify-icon';
 
 	import { AppBar, AppRail, AppRailTile, AppShell, LightSwitch } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
 
 	const storeValue: Writable<number | null> = writable(null);
-	export let loggedIn: boolean = false;
+	export let loggedIn: boolean = true;
 </script>
 
 <svelte:head>
@@ -48,19 +49,18 @@
 	<svelte:fragment slot="sidebarLeft">
 		<AppRail selected={storeValue}>
 			<!-- Left Sidebar Content -->
+			<!-- * Upload * -->
+			<AppRailTile label="Upload" value={0} tag="a" href="/upload">
+				<iconify-icon icon="ic:outline-file-upload" width="32" height="32" />
+			</AppRailTile>
 			<!-- * Dashboard * -->
 			{#if loggedIn}
-				<AppRailTile label="Dashboard" value={0} tag="a" href="/dashboard"
-					><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-						><path
-							fill="currentColor"
-							d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
-						/></svg
-					></AppRailTile
+				<AppRailTile label="Dashboard" value={1} tag="a" href="/dashboard"
+					><iconify-icon icon="ic:sharp-space-dashboard" width="32" height="32" /></AppRailTile
 				>
 			{/if}
 			<!-- * Guide * -->
-			<AppRailTile label="Guide" value={1} tag="a" href="/guide"
+			<AppRailTile label="Guide" value={2} tag="a" href="/guide"
 				><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
 					><g fill="none" stroke="currentColor" stroke-width="1.5"
 						><path
@@ -76,7 +76,7 @@
 			<!-- ! Only show if logged in ! -->
 			<svelte:fragment slot="trail">
 				{#if loggedIn}
-					<AppRailTile label="Profile" value={2} tag="a" href="/profile">
+					<AppRailTile label="Profile" value={3} tag="a" href="/profile">
 						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
 							><path
 								fill="currentColor"
@@ -91,11 +91,11 @@
 
 	<!-- A floating action button in the bottom right -->
 	<!-- ? Might not need this ? -->
-	<button type="button" class="btn-icon btn-icon-xl variant-filled absolute bottom-6 right-6"
+	<!-- <button type="button" class="btn-icon btn-icon-xl variant-filled absolute bottom-6 right-6"
 		><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
 			><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z" /></svg
 		></button
-	>
+	> -->
 
 	<!-- Router Slot -->
 	<slot />
