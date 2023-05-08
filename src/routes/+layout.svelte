@@ -53,36 +53,23 @@
 			<AppRailTile label="Upload" value={0} tag="a" href="/upload">
 				<iconify-icon icon="ic:outline-file-upload" width="32" height="32" />
 			</AppRailTile>
+			<!-- * Guide * -->
+			<AppRailTile label="Guide" value={2} tag="a" href="/guide"
+				><iconify-icon icon="solar:book-bookmark-linear" width="32" height="32" /></AppRailTile
+			>
 			<!-- * Dashboard * -->
 			{#if loggedIn}
 				<AppRailTile label="Dashboard" value={1} tag="a" href="/dashboard"
 					><iconify-icon icon="ic:sharp-space-dashboard" width="32" height="32" /></AppRailTile
 				>
 			{/if}
-			<!-- * Guide * -->
-			<AppRailTile label="Guide" value={2} tag="a" href="/guide"
-				><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-					><g fill="none" stroke="currentColor" stroke-width="1.5"
-						><path
-							d="M4 8c0-2.828 0-4.243.879-5.121C5.757 2 7.172 2 10 2h4c2.828 0 4.243 0 5.121.879C20 3.757 20 5.172 20 8v8c0 2.828 0 4.243-.879 5.121C18.243 22 16.828 22 14 22h-4c-2.828 0-4.243 0-5.121-.879C4 20.243 4 18.828 4 16V8Z"
-						/><path d="M19.898 16h-12c-.93 0-1.395 0-1.777.102A3 3 0 0 0 4 18.224" /><path
-							stroke-linecap="round"
-							d="M8 7h8m-8 3.5h5m6.5 8.5H8"
-						/></g
-					></svg
-				></AppRailTile
-			>
+
 			<!-- Profile icon -->
 			<!-- ! Only show if logged in ! -->
 			<svelte:fragment slot="trail">
 				{#if loggedIn}
 					<AppRailTile label="Profile" value={3} tag="a" href="/profile">
-						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-							><path
-								fill="currentColor"
-								d="M12 19.2c-2.5 0-4.71-1.28-6-3.2c.03-2 4-3.1 6-3.1s5.97 1.1 6 3.1a7.232 7.232 0 0 1-6 3.2M12 5a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-3A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10c0-5.53-4.5-10-10-10Z"
-							/></svg
-						>
+						<iconify-icon icon="mdi:user-circle" width="32" height="32" />
 					</AppRailTile>
 				{/if}
 			</svelte:fragment>
