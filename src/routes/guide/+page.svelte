@@ -18,8 +18,7 @@
 						/></span
 					>upload</a
 				> page. Once uploaded, the application will generate charts and tables based on the data contained
-				within the HAR file. If you are logged in, you will be able to save the HAR file to your account
-				to view later.
+				within the HAR file.
 			</p>
 		</section>
 		<section class="space-y-5">
@@ -116,8 +115,8 @@
 				<section class="p-4 text-sm">
 					<ol class="list-decimal mt-5 ml-6 space-y-3">
 						<li>
-							Start Firefox DEveloper Tools in Network Mode (Top right menu > Developer > Network,
-							or <kbd>Ctrl-Shift-E</kbd>/<kbd>Cmd-Option-E</kbd> on your keyboard)
+							Start Firefox Developer Tools in Network Mode (Top right menu > Developer > Network,
+							or <kbd class="kbd">Ctrl-Shift-E</kbd>/<kbd class="kbd">Cmd-Option-E</kbd> on your keyboard)
 						</li>
 						<li>Turn on <em>"Persist logs"</em> on the right</li>
 						<li>Reproduce the issue</li>
