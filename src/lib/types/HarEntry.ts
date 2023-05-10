@@ -37,6 +37,7 @@ export type HarEntry = {
 		blocked?: number;
 		connect?: number;
 		dns?: number;
+		ssl?: number;
 		receive?: number;
 		send?: number;
 		wait?: number;

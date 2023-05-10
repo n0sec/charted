@@ -1,36 +1,13 @@
 <script lang="ts">
 	import type { HarEntry } from '$lib/types/HarEntry';
-	import { Table, tableMapperValues, type TableSource } from '@skeletonlabs/skeleton';
 	export let entries: HarEntry[] = [];
-
-	const source = entries;
-	console.log(source);
-	let page = {
-		offset: 0,
-		limit: 5,
-		size: source.length,
-		amounts: [5, 10, 25, 50, 100]
-	};
-
-	const requestedURLTable: TableSource = {
-		head: ['URL', 'Method', 'Status', 'Size', 'Time', 'IP Address'],
-		body: tableMapperValues(source, [
-			'request.url',
-			'request.method',
-			'response.status',
-			'response.bodySize',
-			'time',
-			'serverIPAddress'
-		])
-	};
 </script>
 
-<!-- <Table source={requestedURLTable} /> -->
-
 <!-- Responsive Container (recommended) -->
-<div class="table-container">
+<div class="table-container text-sm">
+	<h1 class="unstyled text-xl font-bold ml-6">Request Data with Response Times</h1>
 	<!-- Native Table Element -->
-	<table class="table table-hover">
+	<table class="table table-hover table-compact">
 		<thead>
 			<tr>
 				<th>URL</th>
@@ -49,11 +26,11 @@
 					<td>{entry.response?.status}</td>
 					<td
 						>{#if entry.request?.method == 'GET'}
-							{entry.response?.bodySize}
+							{Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100}
 						{:else}
-							{entry.request?.bodySize}{/if}</td
+							{Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100}{/if}</td
 					>
-					<td>{entry.time}</td>
+					<td>{Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100}</td>
 					<td>{entry.serverIPAddress}</td>
 				</tr>
 			{/each}
