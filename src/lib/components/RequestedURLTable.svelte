@@ -4,6 +4,7 @@
 	export let entries: HarEntry[] = [];
 
 	const source = entries;
+	console.log(source);
 	let page = {
 		offset: 0,
 		limit: 5,
@@ -24,4 +25,41 @@
 	};
 </script>
 
-<Table source={requestedURLTable} />
+<!-- <Table source={requestedURLTable} /> -->
+
+<!-- Responsive Container (recommended) -->
+<div class="table-container">
+	<!-- Native Table Element -->
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>URL</th>
+				<th>Method</th>
+				<th>Status</th>
+				<th>Size</th>
+				<th>Time</th>
+				<th>Server IP Address</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each entries as entry}
+				<tr>
+					<td>{entry.request?.url}</td>
+					<td>{entry.request?.method}</td>
+					<td>{entry.response?.status}</td>
+					<td
+						>{#if entry.request?.method == 'GET'}
+							{entry.response?.bodySize}
+						{:else}
+							{entry.request?.bodySize}{/if}</td
+					>
+					<td>{entry.time}</td>
+					<td>{entry.serverIPAddress}</td>
+				</tr>
+			{/each}
+		</tbody>
+		<tfoot>
+			<!-- ? Add Pagination here? -->
+		</tfoot>
+	</table>
+</div>
