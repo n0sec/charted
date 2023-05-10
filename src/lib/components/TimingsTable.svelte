@@ -4,12 +4,12 @@
 </script>
 
 <!-- Responsive Container (recommended) -->
-<div class="table-container text-sm">
-	<h1 class="unstyled text-xl font-bold ml-6">Request Timings</h1>
+<div class="table-container rounded-none col-span-3">
+	<h1 class="unstyled text-xl font-bold mb-1">Request Timings</h1>
 
 	<!-- Native Table Element -->
-	<table class="table table-hover table-compact">
-		<thead>
+	<table class="table table-hover table-compact rounded-none">
+		<thead class="text-sm">
 			<tr>
 				<th>URL</th>
 				<th>Blocked</th>
@@ -37,7 +37,7 @@
 		</tbody>
 		<tfoot>
 			<tr>
-				<th colspan="3" />
+				<!-- ? May add this later-->
 			</tr>
 		</tfoot>
 	</table>
