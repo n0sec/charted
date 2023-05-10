@@ -4,11 +4,11 @@
 </script>
 
 <!-- Responsive Container (recommended) -->
-<div class="table-container text-sm">
-	<h1 class="unstyled text-xl font-bold ml-6">Request Data with Response Times</h1>
+<div class="table-container rounded-none">
+	<h1 class="unstyled text-xl font-bold mb-1">Request Data with Response Times</h1>
 	<!-- Native Table Element -->
-	<table class="table table-hover table-compact">
-		<thead>
+	<table class="table table-hover table-compact rounded-none">
+		<thead class="text-sm">
 			<tr>
 				<th>URL</th>
 				<th>Method</th>
