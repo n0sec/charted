@@ -33,15 +33,7 @@ export type HarEntry = {
 	serverIPAddress?: string;
 	startedDateTime?: string;
 	time?: number;
-	timings?: {
-		blocked?: number;
-		connect?: number;
-		dns?: number;
-		ssl?: number;
-		receive?: number;
-		send?: number;
-		wait?: number;
-	};
+	timings?: Timings;
 };
 
 interface Cookies {
@@ -62,4 +54,14 @@ interface Headers {
 interface PostDataParams {
 	name: string;
 	value: string;
+}
+
+export interface Timings {
+	blocked: number;
+	connect: number;
+	dns: number;
+	ssl: number;
+	receive: number;
+	send: number;
+	wait: number;
 }
