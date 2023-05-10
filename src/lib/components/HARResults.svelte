@@ -6,6 +6,10 @@
 	export let entries: HarEntry[] = [];
 </script>
 
-<RequestedUrlTable {entries} />
-<TimingsTable {entries} />
-<TimingsGraph {entries} />
+<div class="mx-6 mt-6 space-y-5">
+	<RequestedUrlTable {entries} />
+	<div class="grid grid-cols-5 gap-x-3">
+		<TimingsTable {entries} />
+		<TimingsGraph {entries} />
+	</div>
+</div>
