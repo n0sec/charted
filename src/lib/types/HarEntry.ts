@@ -1,5 +1,6 @@
 export type HarEntry = {
 	request?: {
+		url?: string;
 		bodySize?: number;
 		cookies?: Cookies[];
 		headers?: Headers[];
