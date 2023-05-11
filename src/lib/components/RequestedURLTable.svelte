@@ -1,20 +1,22 @@
 <script lang="ts">
 	import type { HarEntry } from '$lib/types/HarEntry';
-	import { Table, tableMapperValues, type TableSource } from '@skeletonlabs/skeleton';
+	import { Paginator, Table, tableMapperValues, type TableSource } from '@skeletonlabs/skeleton';
+	import type { PaginationSettings } from '@skeletonlabs/skeleton/dist/components/Paginator/types';
 	export let entries: HarEntry[] = [];
 
-	const sourceData = [
-		entries.map((entry) => entry.request?.url),
-		entries.map((entry) => entry.request?.method),
-		entries.map((entry) => entry.response?.status),
-		entries.map((entry) =>
-			entry.request?.method == 'GET'
-				? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
-				: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100
-		),
-		entries.map((entry) => Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100),
-		entries.map((entry) => entry.serverIPAddress)
-	];
+	const sourceData = entries.map((entry) => {
+		return {
+			url: entry.request?.url,
+			method: entry.request?.method,
+			status: entry.response?.status,
+			size:
+				entry.request?.method == 'GET'
+					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
+					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
+			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
+			serverIPAddress: entry.serverIPAddress
+		};
+	});
 
 	const requestTable: TableSource = {
 		head: ['URL', 'Method', 'Status', 'Size', 'Time', 'Server IP Address'],
@@ -28,10 +30,22 @@
 		]),
 		foot: []
 	};
+
+	// Paginator Settings
+	let page: PaginationSettings = {
+		offset: 0,
+		limit: 10,
+		size: sourceData.length,
+		amounts: [1, 2, 5, 10]
+	};
 </script>
 
-<Table source={requestTable} />
+<div class="rounded-none space-y-3">
+	<Table source={requestTable} class="!rounded-none" />
+	<Paginator bind:settings={page} />
+</div>
 
+<!-- ? Tailwind Table -- may not need this -->
 <!-- <div class="table-container rounded-none">
 	<h1 class="unstyled text-xl font-bold mb-1">Request Data with Response Times</h1>
 	<table class="table table-hover table-compact rounded-none">
