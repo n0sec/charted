@@ -31,7 +31,7 @@
 			position: 'top',
 			// ! FIXME: This shows up weird. Need to fix
 			// Negative values shouldn't be added together, they should just be 0
-			formatter: function (params) {
+			formatter: function (params: any) {
 				return Math.round((Number(params.value) + Number.EPSILON) * 100) / 100 + ' ms';
 			}
 		},
