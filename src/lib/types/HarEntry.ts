@@ -31,9 +31,11 @@ export type HarEntry = {
 		statusText?: string;
 	};
 	serverIPAddress?: string;
-	startedDateTime?: string;
+	startedDateTime?: string | Date;
 	time?: number;
 	timings?: Timings;
+	_resourceType?: string;
+	_fromCache?: CacheOption;
 };
 
 interface Cookies {
@@ -64,4 +66,11 @@ export interface Timings {
 	receive: number;
 	send: number;
 	wait: number;
+}
+
+enum CacheOption {
+	Disk = 'disk',
+	Memory = 'memory',
+	None = 'none',
+	null = 'null'
 }
