@@ -21,7 +21,7 @@
 </script>
 
 <div class="ml-3 font-bold flex flex-col">
-	<h1 class="unstyled font-bold text-lg text-white mb-1">Summary</h1>
+	<h1 class="unstyled font-bold text-lg mb-1">Summary</h1>
 	<p>
 		All requests completed in <span class="dark:text-primary-500">{pageLoadTime}</span> seconds
 	</p>
