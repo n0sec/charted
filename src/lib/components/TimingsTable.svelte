@@ -4,6 +4,7 @@
 	import type { PaginationSettings } from '@skeletonlabs/skeleton/dist/components/Paginator/types';
 	export let entries: HarEntry[] = [];
 
+	// Define the source data
 	const sourceData = entries.map((entry) => {
 		return {
 			url: entry.request?.url,
@@ -42,7 +43,7 @@
 </script>
 
 <div class="rounded-none col-span-3 text-sm table-compact">
-	<h1 class="unstyled text-lg ml-3 font-bold mb-1">Request Timings</h1>
+	<h1 class="unstyled text-lg ml-3 font-bold mb-1">Request Timings (in ms)</h1>
 	<Table source={timingsTable} />
 	<div class="mt-3">
 		{#if sourceData.length > 10}
