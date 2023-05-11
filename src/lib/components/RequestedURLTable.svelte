@@ -9,10 +9,11 @@
 			url: entry.request?.url,
 			method: entry.request?.method,
 			status: entry.response?.status,
-			size:
+			bodySize:
 				entry.request?.method == 'GET'
 					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
 					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
+			contentSize: Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100,
 			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
 			serverIPAddress: entry.serverIPAddress,
 			cache: entry._fromCache?.toString()
@@ -20,12 +21,22 @@
 	});
 
 	const requestTable: TableSource = {
-		head: ['URL', 'Method', 'Status', 'Size (Bytes)', 'Time (ms)', 'Server IP Address', 'Cache'],
+		head: [
+			'URL',
+			'Method',
+			'Status',
+			'Body Size (Bytes)',
+			'Content Size (Bytes)',
+			'Time (ms)',
+			'Server IP Address',
+			'Cache'
+		],
 		body: tableMapperValues(sourceData, [
 			'url',
 			'method',
 			'status',
-			'size',
+			'bodySize',
+			'contentSize',
 			'time',
 			'serverIPAddress',
 			'cache'
