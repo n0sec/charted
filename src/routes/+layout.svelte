@@ -17,7 +17,7 @@
 	} from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
 
-	const storeValue: Writable<number | null> = writable(null);
+	const storeValue: Writable<number | null> = writable(0);
 </script>
 
 <svelte:head>
