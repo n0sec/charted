@@ -15,23 +15,31 @@
 	const option = {
 		xAxis: {
 			type: 'category',
-			data: ['Blocked', 'Connect', 'DNS', 'Receive', 'Send', 'SSL', 'Wait']
+			data: ['Blocked', 'Connect', 'DNS', 'Receive', 'Send', 'SSL', 'Wait'],
+			axisLabel: {
+				color: '#ffffff'
+			}
 		},
 		yAxis: {
 			axisLabel: {
 				formatter: '{value} ms',
-				align: 'right'
+				align: 'right',
+				color: '#ffffff'
 			},
 			min: 0,
+			scale: true,
 			type: 'value',
 			name: 'Response Time (in ms)'
 		},
 		label: {
 			show: true,
 			position: 'top',
-			// ! FIXME: This shows up weird. Need to fix
+			color: '#ffffff',
 			// Negative values shouldn't be added together, they should just be 0
 			formatter: function (params: any) {
+				if (params.value < 0) {
+					return 0;
+				}
 				return Math.round((Number(params.value) + Number.EPSILON) * 100) / 100 + ' ms';
 			}
 		},
@@ -79,6 +87,6 @@
 </script>
 
 <div class="col-span-2">
-	<h1 class="unstyled text-xl font-bold mb-1">Timing Totals by Type</h1>
+	<h1 class="unstyled text-lg font-bold mb-1">Timing Totals by Type</h1>
 	<div bind:this={chartContainer} style="width: 100%;" style:height />
 </div>
