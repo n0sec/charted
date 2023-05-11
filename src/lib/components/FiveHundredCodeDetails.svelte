@@ -18,9 +18,12 @@
 				entry.request?.method == 'GET'
 					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
 					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
+			contentSize: Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100,
 			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
 			serverIPAddress: entry.serverIPAddress,
-			statusText: JSON.parse(entry.response?.content?.text as string).message
+			statusText: JSON.parse(entry.response?.content?.text as string)
+				? JSON.parse(entry.response?.content?.text as string).message
+				: '' // This may cause an issue with non JSON responses and if there is no `message` property
 		};
 	});
 
