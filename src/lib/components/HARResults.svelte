@@ -8,6 +8,7 @@
 	import TimingsGraph from './TimingsGraph.svelte';
 	import TimingsTable from './TimingsTable.svelte';
 	import PageLoadDetails from './PageLoadDetails.svelte';
+	import ThreeHundredCodeDetails from './ThreeHundredCodeDetails.svelte';
 	export let entries: HarEntry[] = [];
 </script>
 
@@ -15,6 +16,9 @@
 	<PageLoadDetails {entries} />
 	<ResponseCodes {entries} />
 	<ResponseCodesPieChart {entries} />
+	{#if entries.filter((code) => code.response?.status >= 300 && code.response?.status < 400).length > 0}
+		<ThreeHundredCodeDetails {entries} />
+	{/if}
 	{#if entries.filter((code) => code.response?.status >= 400 && code.response?.status < 500).length > 0}
 		<FourHundredCodeDetails {entries} />
 	{/if}
