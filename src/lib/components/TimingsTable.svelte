@@ -28,13 +28,22 @@
 		offset: 0,
 		limit: 10,
 		size: sourceData.length,
-		amounts: [1, 2, 5, 10]
+		amounts: [1, 2, 5, 10, 25]
 	};
+
+	if (sourceData.length > 25) {
+		page.amounts.push(entries.length);
+	}
+
+	$: paginatedEntries = sourceData.slice(
+		page.offset * page.limit, // start
+		page.offset * page.limit + page.limit // end
+	);
 </script>
 
 <div class="rounded-none col-span-3 text-sm table-compact">
 	<h1 class="unstyled text-lg ml-3 font-bold mb-1">Request Timings (in ms)</h1>
-	<Table source={timingsTable} />
+	<Table source={{ head: timingsTable.head, body: paginatedEntries }} />
 	<div class="mt-3">
 		{#if sourceData.length > 10}
 			<Paginator bind:settings={page} />
