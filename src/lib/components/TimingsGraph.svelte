@@ -62,13 +62,13 @@
 			.reduce(
 				(acc, obj) => {
 					return {
-						blocked: acc.blocked! + (obj.blocked ?? 0),
-						connect: acc.connect! + (obj.connect ?? 0),
-						dns: acc.dns! + (obj.dns ?? 0),
-						receive: acc.receive! + (obj.receive ?? 0),
-						send: acc.send! + (obj.send ?? 0),
-						ssl: acc.ssl! + (obj.ssl ?? 0),
-						wait: acc.wait! + (obj.wait ?? 0)
+						blocked: Number(acc.blocked!) + (Number(obj.blocked) ?? 0),
+						connect: Number(acc.connect!) + (Number(obj.connect) ?? 0),
+						dns: Number(acc.dns!) + (Number(obj.dns) ?? 0),
+						receive: Number(acc.receive!) + (Number(obj.receive) ?? 0),
+						send: Number(acc.send!) + (Number(obj.send) ?? 0),
+						ssl: Number(acc.ssl!) + (Number(obj.ssl) ?? 0),
+						wait: Number(acc.wait!) + (Number(obj.wait) ?? 0)
 					} as Timings;
 				},
 				{
