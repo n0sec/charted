@@ -6,32 +6,25 @@
 	export let entries: HarEntry[] = [];
 
 	let fiveHundredResponseCodes = entries.filter(
-		(code) => code.response?.status! >= 500 && code.response?.status! < 600
+		(code) => Number(code.response?.status!) >= 500 && Number(code.response?.status!) < 600
 	);
 
 	const sourceData = fiveHundredResponseCodes.map((entry) => {
-		return {
-			url: entry.request?.url,
-			method: entry.request?.method,
-			statusCode: entry.response?.status,
-			// Check whether the request method was a GET
-			// If it was a GET, then return the response bodySize
-			// Otherwise, return the request bodySize (which will be the POST bodySize)
-
-			bodySize:
-				entry.request?.method == 'GET'
-					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
-					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
-			contentSize: Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100,
-			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
-			serverIPAddress: entry.serverIPAddress,
-			// If the status text is JSON, then we want to parse it and get the `message` property
-			// Otherwise, we just want to return the status text
-
-			statusText: JSON.parse(entry.response?.content?.text as string)
+		return [
+			String(entry.request?.url), // url
+			String(entry.request?.method), // method
+			String(entry.response?.status), // status
+			JSON.parse(entry.response?.content?.text as string) // errorText
 				? JSON.parse(entry.response?.content?.text as string).message
-				: entry.response?.content?.text
-		};
+				: entry.response?.content?.text,
+			String(entry.request?.method) == 'GET'
+				? String(Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100)
+				: String(Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100),
+			String(entry.response?.content?.size), // contentSize
+			String(entry.time), // time
+			String(entry.serverIPAddress), // serverIPAddress
+			String(entry._fromCache) // cache
+		];
 	});
 
 	const fiveHundredResponseCodesTable: TableSource = {
@@ -43,19 +36,10 @@
 			'Body Size (bytes)',
 			'Content Size (bytes)',
 			'Time (ms)',
-			'Server IP Address'
+			'Server IP Address',
+			'Cache'
 		],
-		body: tableMapperValues(sourceData, [
-			'url',
-			'method',
-			'statusCode',
-			'statusText',
-			'bodySize',
-			'contentSize',
-			'time',
-			'serverIPAddress'
-		]),
-		foot: []
+		body: sourceData
 	};
 
 	// Paginator Settings
@@ -63,13 +47,22 @@
 		offset: 0,
 		limit: 10,
 		size: sourceData.length,
-		amounts: [1, 2, 5, 10]
+		amounts: [1, 2, 5, 10, 25]
 	};
+
+	if (sourceData.length > 25) {
+		page.amounts.push(entries.length);
+	}
+
+	$: paginatedEntries = sourceData.slice(
+		page.offset * page.limit, // start
+		page.offset * page.limit + page.limit // end
+	);
 </script>
 
 <div class="rounded-none space-y-3-[:not(.unstyled)] text-sm table-compact">
 	<h1 class="unstyled text-lg font-bold ml-3 mb-1">500 Response Codes Details</h1>
-	<Table source={fiveHundredResponseCodesTable} class="!rounded-none" />
+	<Table source={{ head: fiveHundredResponseCodesTable.head, body: paginatedEntries }} />
 	<div class="mt-3">
 		{#if sourceData.length > 10}
 			<Paginator bind:settings={page} />

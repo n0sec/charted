@@ -6,31 +6,21 @@
 
 	// Define the source data
 	const sourceData = entries.map((entry) => {
-		return {
-			url: entry.request?.url,
-			blocked: Math.round((Number(entry.timings?.blocked) + Number.EPSILON) * 100) / 100,
-			connect: Math.round((Number(entry.timings?.connect) + Number.EPSILON) * 100) / 100,
-			dns: Math.round((Number(entry.timings?.dns) + Number.EPSILON) * 100) / 100,
-			receive: Math.round((Number(entry.timings?.receive) + Number.EPSILON) * 100) / 100,
-			send: Math.round((Number(entry.timings?.send) + Number.EPSILON) * 100) / 100,
-			ssl: Math.round((Number(entry.timings?.ssl) + Number.EPSILON) * 100) / 100,
-			wait: Math.round((Number(entry.timings?.wait) + Number.EPSILON) * 100) / 100
-		};
+		return [
+			String(entry.request?.url), // url
+			String(Math.round((Number(entry.timings?.blocked) + Number.EPSILON) * 100) / 100), // blocked
+			String(Math.round((Number(entry.timings?.connect) + Number.EPSILON) * 100) / 100), // connect
+			String(Math.round((Number(entry.timings?.dns) + Number.EPSILON) * 100) / 100), // dns
+			String(Math.round((Number(entry.timings?.receive) + Number.EPSILON) * 100) / 100), // receive
+			String(Math.round((Number(entry.timings?.send) + Number.EPSILON) * 100) / 100), // send
+			String(Math.round((Number(entry.timings?.ssl) + Number.EPSILON) * 100) / 100), // ssl
+			String(Math.round((Number(entry.timings?.wait) + Number.EPSILON) * 100) / 100) // wait
+		];
 	});
 
 	const timingsTable: TableSource = {
 		head: ['URL', 'Blocked', 'Connect', 'DNS', 'Receive', 'Send', 'SSL', 'Wait'],
-		body: tableMapperValues(sourceData, [
-			'url',
-			'blocked',
-			'connect',
-			'dns',
-			'receive',
-			'send',
-			'ssl',
-			'wait'
-		]),
-		foot: []
+		body: sourceData
 	};
 
 	// Paginator Settings

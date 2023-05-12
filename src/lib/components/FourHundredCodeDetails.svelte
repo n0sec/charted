@@ -1,36 +1,29 @@
 <script lang="ts">
 	import type { HarEntry } from '$lib/types/HarEntry';
-	import { Paginator, Table, tableMapperValues, type TableSource } from '@skeletonlabs/skeleton';
+	import { Paginator, Table, type TableSource } from '@skeletonlabs/skeleton';
 	import type { PaginationSettings } from '@skeletonlabs/skeleton/dist/components/Paginator/types';
 
 	export let entries: HarEntry[] = [];
 
 	let fourHundredResponseCodes = entries.filter(
-		(code) => code.response?.status! >= 400 && code.response?.status! < 500
+		(code) => Number(code.response?.status!) >= 400 && Number(code.response?.status!) < 500
 	);
 
 	const sourceData = fourHundredResponseCodes.map((entry) => {
-		return {
-			url: entry.request?.url,
-			method: entry.request?.method,
-			statusCode: entry.response?.status,
-			// Check whether the request method was a GET
-			// If it was a GET, then return the response bodySize
-			// Otherwise, return the request bodySize (which will be the POST bodySize)
-			bodySize:
-				entry.request?.method == 'GET'
-					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
-					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
-			contentSize: Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100,
-
-			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
-			serverIPAddress: entry.serverIPAddress,
-			// If the status text is JSON, then we want to parse it and get the `message` property
-			// Otherwise, we just want to return the status text
-			statusText: JSON.parse(entry.response?.content?.text as string)
-				? JSON.parse(entry.response?.content?.text as string).message
-				: entry.response?.content?.text
-		};
+		return [
+			String(entry.request?.url), // url
+			String(entry.request?.method), // method
+			String(entry.response?.status), // status
+			String(entry.response?.statusText), // statusText/Error Text
+			entry.request?.method === 'GET' // bodySize
+				? String(Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100)
+				: String(Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100),
+			String(Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100), // contentSize
+			String(entry._resourceType), // resourceType
+			String(Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100), // time
+			String(entry.serverIPAddress), // serverIPAddress
+			String(entry._fromCache) // cache
+		];
 	});
 
 	const fourHundredResponseCodesTable: TableSource = {
@@ -41,20 +34,12 @@
 			'Error Text',
 			'Body Size (bytes)',
 			'Content Size (bytes)',
+			'Resource Type',
 			'Time (ms)',
-			'Server IP Address'
+			'Server IP Address',
+			'Cache'
 		],
-		body: tableMapperValues(sourceData, [
-			'url',
-			'method',
-			'statusCode',
-			'statusText',
-			'bodySize',
-			'contentSize',
-			'time',
-			'serverIPAddress'
-		]),
-		foot: []
+		body: sourceData
 	};
 
 	// Paginator Settings
@@ -62,13 +47,22 @@
 		offset: 0,
 		limit: 10,
 		size: sourceData.length,
-		amounts: [1, 2, 5, 10]
+		amounts: [1, 2, 5, 10, 25]
 	};
+
+	if (sourceData.length > 25) {
+		page.amounts.push(entries.length);
+	}
+
+	$: paginatedEntries = sourceData.slice(
+		page.offset * page.limit, // start
+		page.offset * page.limit + page.limit // end
+	);
 </script>
 
 <div class="rounded-none space-y-3-[:not(.unstyled)] text-sm table-compact">
 	<h1 class="unstyled text-lg font-bold ml-3 mb-1">400 Response Codes Details</h1>
-	<Table source={fourHundredResponseCodesTable} class="!rounded-none" />
+	<Table source={{ head: fourHundredResponseCodesTable.head, body: paginatedEntries }} />
 	<div class="mt-3">
 		{#if sourceData.length > 10}
 			<Paginator bind:settings={page} />
