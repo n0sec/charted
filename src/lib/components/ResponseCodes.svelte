@@ -7,10 +7,18 @@
 		return entry.response?.status;
 	});
 
-	let twoHundredResponseCodes = responseCodes.filter((code) => code! >= 200 && code! < 300);
-	let threeHundredResponseCodes = responseCodes.filter((code) => code! >= 300 && code! < 400);
-	let fourHundredResponseCodes = responseCodes.filter((code) => code! >= 400 && code! < 500);
-	let fiveHundredResponseCodes = responseCodes.filter((code) => code! >= 500 && code! < 600);
+	let twoHundredResponseCodes = responseCodes.filter(
+		(code) => Number(code!) >= 200 && Number(code!) < 300
+	);
+	let threeHundredResponseCodes = responseCodes.filter(
+		(code) => Number(code!) >= 300 && Number(code!) < 400
+	);
+	let fourHundredResponseCodes = responseCodes.filter(
+		(code) => Number(code!) >= 400 && Number(code!) < 500
+	);
+	let fiveHundredResponseCodes = responseCodes.filter(
+		(code) => Number(code!) >= 500 && Number(code!) < 600
+	);
 </script>
 
 <h1 class="unstyled text-lg font-bold mb-1 ml-3">Response Codes</h1>

@@ -63,25 +63,25 @@
 					{
 						value: entries
 							.map((entry) => entry.response?.status)
-							.filter((code) => code! >= 200 && code! < 300).length,
+							.filter((code) => Number(code!) >= 200 && Number(code!) < 300).length,
 						name: '200'
 					},
 					{
 						value: entries
 							.map((entry) => entry.response?.status)
-							.filter((code) => code! >= 300 && code! < 400).length,
+							.filter((code) => Number(code!) >= 300 && Number(code!) < 400).length,
 						name: '300'
 					},
 					{
 						value: entries
 							.map((entry) => entry.response?.status)
-							.filter((code) => code! >= 400 && code! < 500).length,
+							.filter((code) => Number(code!) >= 400 && Number(code!) < 500).length,
 						name: '400'
 					},
 					{
 						value: entries
 							.map((entry) => entry.response?.status)
-							.filter((code) => code! >= 500 && code! < 600).length,
+							.filter((code) => Number(code!) >= 500 && Number(code!) < 600).length,
 						name: '500'
 					}
 				],
