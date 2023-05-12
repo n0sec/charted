@@ -14,7 +14,11 @@
 			url: entry.request?.url,
 			method: entry.request?.method,
 			statusCode: entry.response?.status,
-			size:
+			// Check whether the request method was a GET
+			// If it was a GET, then return the response bodySize
+			// Otherwise, return the request bodySize (which will be the POST bodySize)
+
+			bodySize:
 				entry.request?.method == 'GET'
 					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
 					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
@@ -25,12 +29,21 @@
 	});
 
 	const threeHundredResponseCodesTable: TableSource = {
-		head: ['URL', 'Method', 'Status', 'Size (bytes)', 'Time (ms)', 'Server IP Address'],
+		head: [
+			'URL',
+			'Method',
+			'Status',
+			'Body Size (bytes)',
+			'Content Size (bytes)',
+			'Time (ms)',
+			'Server IP Address'
+		],
 		body: tableMapperValues(sourceData, [
 			'url',
 			'method',
 			'statusCode',
-			'size',
+			'bodySize',
+			'contentSize',
 			'time',
 			'serverIPAddress'
 		]),

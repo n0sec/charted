@@ -14,16 +14,23 @@
 			url: entry.request?.url,
 			method: entry.request?.method,
 			statusCode: entry.response?.status,
-			size:
+			// Check whether the request method was a GET
+			// If it was a GET, then return the response bodySize
+			// Otherwise, return the request bodySize (which will be the POST bodySize)
+
+			bodySize:
 				entry.request?.method == 'GET'
 					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
 					: Math.round((Number(entry.request?.bodySize) + Number.EPSILON) * 100) / 100,
 			contentSize: Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100,
 			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
 			serverIPAddress: entry.serverIPAddress,
+			// If the status text is JSON, then we want to parse it and get the `message` property
+			// Otherwise, we just want to return the status text
+
 			statusText: JSON.parse(entry.response?.content?.text as string)
 				? JSON.parse(entry.response?.content?.text as string).message
-				: '' // This may cause an issue with non JSON responses and if there is no `message` property
+				: entry.response?.content?.text
 		};
 	});
 
@@ -33,7 +40,8 @@
 			'Method',
 			'Status',
 			'Error Text',
-			'Size (bytes)',
+			'Body Size (bytes)',
+			'Content Size (bytes)',
 			'Time (ms)',
 			'Server IP Address'
 		],
@@ -42,7 +50,8 @@
 			'method',
 			'statusCode',
 			'statusText',
-			'size',
+			'bodySize',
+			'contentSize',
 			'time',
 			'serverIPAddress'
 		]),

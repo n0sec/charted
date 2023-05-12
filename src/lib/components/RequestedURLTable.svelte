@@ -9,6 +9,10 @@
 			url: entry.request?.url,
 			method: entry.request?.method,
 			status: entry.response?.status,
+			// Check whether the request method was a GET
+			// If it was a GET, then return the response bodySize
+			// Otherwise, return the request bodySize (which will be the POST bodySize)
+
 			bodySize:
 				entry.request?.method == 'GET'
 					? Math.round((Number(entry.response?.bodySize) + Number.EPSILON) * 100) / 100
@@ -16,7 +20,8 @@
 			contentSize: Math.round((Number(entry.response?.content?.size) + Number.EPSILON) * 100) / 100,
 			time: Math.round((Number(entry.time) + Number.EPSILON) * 100) / 100,
 			serverIPAddress: entry.serverIPAddress,
-			cache: entry._fromCache?.toString()
+			cache: entry._fromCache?.toString(),
+			resourceType: entry._resourceType
 		};
 	});
 
@@ -27,6 +32,7 @@
 			'Status',
 			'Body Size (Bytes)',
 			'Content Size (Bytes)',
+			'Resource Type',
 			'Time (ms)',
 			'Server IP Address',
 			'Cache'
@@ -37,6 +43,7 @@
 			'status',
 			'bodySize',
 			'contentSize',
+			'resourceType',
 			'time',
 			'serverIPAddress',
 			'cache'
