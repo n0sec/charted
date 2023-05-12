@@ -1,10 +1,10 @@
 export type HarEntry = {
 	request?: {
 		url?: string;
-		bodySize?: number;
+		bodySize?: number | string;
 		cookies?: Cookies[];
 		headers?: Headers[];
-		headersSize?: number;
+		headersSize?: number | string;
 		httpVersion?: string;
 		method?: string;
 		postData?: {
@@ -16,23 +16,23 @@ export type HarEntry = {
 	queryString?: [];
 	url?: string;
 	response?: {
-		bodySize?: number;
+		bodySize?: number | string;
 		content?: {
 			mimeType?: string;
-			size?: number;
+			size?: number | string;
 			text?: string;
 		};
 		cookies?: Cookies[];
 		headers?: Headers[];
-		headersSize?: number;
+		headersSize?: number | string;
 		httpVersion?: string;
 		redirectURL?: string;
-		status?: number;
+		status?: number | string;
 		statusText?: string;
 	};
 	serverIPAddress?: string;
 	startedDateTime?: string | Date;
-	time?: number;
+	time?: number | string;
 	timings?: Timings;
 	_resourceType?: string;
 	_fromCache?: CacheOption;
@@ -59,13 +59,13 @@ interface PostDataParams {
 }
 
 export interface Timings {
-	blocked: number;
-	connect: number;
-	dns: number;
-	ssl: number;
-	receive: number;
-	send: number;
-	wait: number;
+	blocked: number | string;
+	connect: number | string;
+	dns: number | string;
+	ssl: number | string;
+	receive: number | string;
+	send: number | string;
+	wait: number | string;
 }
 
 enum CacheOption {
