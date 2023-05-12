@@ -27,5 +27,7 @@
 		</aside>
 	</div>
 {:else}
-	<HarResults {entries} />
+	<div class="mb-3">
+		<HarResults {entries} />
+	</div>
 {/if}
