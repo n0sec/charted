@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HarEntry } from '$lib/types/HarEntry';
-	import { Paginator, Table, tableMapperValues, type TableSource } from '@skeletonlabs/skeleton';
+	import { Paginator, Table, type TableSource } from '@skeletonlabs/skeleton';
 	import type { PaginationSettings } from '@skeletonlabs/skeleton/dist/components/Paginator/types';
 
 	export let entries: HarEntry[] = [];
