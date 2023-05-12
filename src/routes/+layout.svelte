@@ -7,19 +7,10 @@
 	import '../app.postcss';
 	import 'iconify-icon';
 
-	import {
-		AppBar,
-		AppRail,
-		AppRailTile,
-		AppShell,
-		LightSwitch,
-		Toast
-	} from '@skeletonlabs/skeleton';
+	import { AppBar, AppRail, AppRailTile, AppShell, LightSwitch } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
-	import { invalidate } from '$app/navigation';
 
-	const storeValue: Writable<number | null> = writable(null);
-	export let loggedIn: boolean = true;
+	const storeValue: Writable<number | null> = writable(0);
 </script>
 
 <svelte:head>

@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.4.0",
+		"echarts": "^5.4.2",
 		"iconify-icon": "^1.0.7"
 	}
 }
