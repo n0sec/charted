@@ -36,9 +36,24 @@
 	const option = {
 		xAxis: {
 			type: 'category',
-			data: ['Document', 'Stylesheet', 'Script', 'Font', 'Fetch', 'XHR', 'Other'],
+			data: [
+				'Document',
+				'Stylesheet',
+				'Image',
+				'Media',
+				'Text Track',
+				'Event Source',
+				'Web Socket',
+				'Manifest',
+				'Script',
+				'Font',
+				'Fetch',
+				'XHR',
+				'Other'
+			],
 			axisLabel: {
-				color: '#ffffff'
+				color: '#ffffff',
+				rotate: 45
 			}
 		},
 		yAxis: {
@@ -62,6 +77,12 @@
 				data: [
 					responseSizeAccumulation['document'],
 					responseSizeAccumulation['stylesheet'],
+					responseSizeAccumulation['image'],
+					responseSizeAccumulation['media'],
+					responseSizeAccumulation['texttrack'],
+					responseSizeAccumulation['eventsource'],
+					responseSizeAccumulation['websocket'],
+					responseSizeAccumulation['manifest'],
 					responseSizeAccumulation['script'],
 					responseSizeAccumulation['font'],
 					responseSizeAccumulation['fetch'],
