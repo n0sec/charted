@@ -35,7 +35,7 @@
 		<AppRail
 			selected={storeValue}
 			class="border-r border-surface-500/50"
-			background="bg-surface-900"
+			background="bg-surface-900-token"
 		>
 			<!-- Left Sidebar Content -->
 			<!-- * Home * -->
