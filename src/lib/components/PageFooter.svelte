@@ -3,7 +3,7 @@
 </script>
 
 <div class="page-footer border-t border-surface-500/50">
-	<div class="container mx-auto grid grid-cols-[1fr_auto] grid-rows-5 gap-y-1 py-6">
+	<div class="container mx-auto md:grid md:grid-cols-[1fr_auto] md:grid-rows-5 md:gap-y-1 py-6">
 		<strong>&copy; 2023 cHARted</strong>
 		<div class="row-start-2">HAR Analyzer & Network Metrics</div>
 		<a
