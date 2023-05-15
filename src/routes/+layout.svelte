@@ -34,7 +34,7 @@
 	<svelte:fragment slot="sidebarLeft">
 		<AppRail
 			selected={storeValue}
-			class="border-r border-surface-500/50"
+			class="border-r dark:border-surface-500/50"
 			background="bg-surface-900-token"
 		>
 			<!-- Left Sidebar Content -->
