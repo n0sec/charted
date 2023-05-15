@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { definitions } from '$lib/definitions';
 	import 'iconify-icon';
 </script>
 
@@ -156,5 +157,24 @@
 				</section>
 			</div>
 		</div>
+		<section class="space-y-5">
+			<h1 class="unstyled font-bold text-2xl mt-6">HAR File Vocabulary</h1>
+			<p>
+				Review the definitions below to familiarize yourself with the network statistics that are
+				presented when uploading a HAR file to this site.
+			</p>
+			<dl class="list-dl">
+				{#each definitions as { title, description }, i}
+					<div class="list-item">
+						<span class="flex-auto">
+							<dt class="font-bold">{title}</dt>
+							<dd>
+								{description}
+							</dd>
+						</span>
+					</div>
+				{/each}
+			</dl>
+		</section>
 	</article>
 </div>
