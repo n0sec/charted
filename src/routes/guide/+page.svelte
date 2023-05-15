@@ -26,9 +26,14 @@
 					href="https://en.wikipedia.org/wiki/HAR_(file_format)"
 					target="_blank"
 					class="font-bold">HAR (HTTP Archive)</a
-				> format is a file used by several HTTP session tools to export captured network data. The format
+				>
+				format is a file used by several HTTP session tools to export captured network data. The format
 				is a JSON object with a particular set of fields. Not all the fields in the HAR format are mandatory,
-				and in many cases, some information won't be saved to the file.
+				and in many cases, some information won't be saved to the file. More information on the HTTP
+				Archive 1.2 spec can be found
+				<a href="http://www.softwareishard.com/blog/har-12-spec/" class="font-bold" target="_blank"
+					>here</a
+				>.
 			</p>
 		</section>
 		<aside class="alert variant-filled-warning md:w-1/2 rounded-2xl">

@@ -2,12 +2,12 @@ export const definitions = [
 	{
 		title: 'Body Size',
 		description:
-			'Total number of bytes from the start of the HTTP request message until (and including) the double CRLF before the body. Set to -1 if the info is not available.'
+			'Size of the request body (POST data payload) in bytes. Set to -1 if the info is not available.'
 	},
 	{
 		title: 'Content Size',
 		description:
-			'The length of the returned content in bytes. Should be equal to `response.bodySize` if there is no compression and bigger when the content has been compressed.'
+			'The length of the returned content in bytes. Should be equal to `response.bodySize` if there is no compression and bigger when the content has been compressed. Set to -1 if the info is not available.'
 	},
 	{
 		title: 'Resource Type',
@@ -20,15 +20,36 @@ export const definitions = [
 		description:
 			'Whether the request was served from the cache or not. Values are `disk`, `memory`, or `undefined`'
 	},
-	{ title: 'Blocked', description: 'Time spent in a queue waiting for a network connection.' },
-	{ title: 'DNS', description: 'DNS resolution time. The time required to resolve a host name.' },
-	{ title: 'SSL', description: 'Time required for SSL/TLS negotiation.' },
+	{
+		title: 'Blocked',
+		description:
+			'Time spent in a queue waiting for a network connection. Set to -1 if the info is not available or does not apply.'
+	},
+	{
+		title: 'DNS',
+		description:
+			'DNS resolution time. The time required to resolve a host name. Set to -1 if the info is not available or does not apply.'
+	},
+	{
+		title: 'SSL',
+		description:
+			'Time required for SSL/TLS negotiation. Set to -1 if the info is not available or does not apply.'
+	},
 	{
 		title: 'Connect',
 		description:
-			'Time required to create TCP connection. Note that a connection is not a socket. One connection may use multiple sockets.'
+			'Time required to create TCP connection. Note that a connection is not a socket. One connection may use multiple sockets. Set to -1 if the info is not available or does not apply.'
 	},
-	{ title: 'Send', description: 'Time required to send HTTP request to the server.' },
-	{ title: 'Wait', description: 'Waiting for a response from the server.' },
-	{ title: 'Receive', description: 'Time required to read entire response from the server.' }
+	{
+		title: 'Send',
+		description: 'Time required to send HTTP request to the server.'
+	},
+	{
+		title: 'Wait',
+		description: 'Waiting for a response from the server.'
+	},
+	{
+		title: 'Receive',
+		description: 'Time required to read entire response from the server.'
+	}
 ];
