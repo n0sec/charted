@@ -57,7 +57,7 @@
 				Mozilla Firefox, and Google Chrome.
 			</p>
 		</section>
-		<div class="grid grid-cols-3 gap-5">
+		<div class="sm:flex sm:flex-col md:grid md:grid-cols-3 gap-5">
 			<!-- * Internet Explorer * -->
 			<div class="card overflow-hidden">
 				<header class="card-header font-bold p-3 bg-primary-500">
