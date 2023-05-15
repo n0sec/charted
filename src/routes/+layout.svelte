@@ -9,6 +9,7 @@
 
 	import { AppBar, AppRail, AppRailTile, AppShell, LightSwitch } from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
+	import PageFooter from '$lib/components/PageFooter.svelte';
 
 	const storeValue: Writable<number | null> = writable(0);
 </script>
@@ -31,7 +32,11 @@
 		</AppBar>
 	</svelte:fragment>
 	<svelte:fragment slot="sidebarLeft">
-		<AppRail selected={storeValue}>
+		<AppRail
+			selected={storeValue}
+			class="border-r border-surface-500/50"
+			background="bg-surface-900"
+		>
 			<!-- Left Sidebar Content -->
 			<!-- * Home * -->
 			<AppRailTile label="Home" value={0} tag="a" href="/">
@@ -47,4 +52,5 @@
 	<!-- Router Slot -->
 	<slot />
 	<!-- ---- / ---- -->
+	<svelte:fragment slot="pageFooter"><PageFooter /></svelte:fragment>
 </AppShell>
