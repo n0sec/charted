@@ -8,17 +8,14 @@
 			<h1 class="unstyled font-bold text-2xl">How to Use This Tool</h1>
 			<p>
 				To use this tool, begin by uploading a HAR file on the <a
-					href="/upload"
+					href="/"
 					class="font-bold"
 					target="_self"
-					><span
-						><iconify-icon
-							icon="ic:outline-file-upload"
-							class="text-center align-middle text-lg mr-1"
-						/></span
-					>upload</a
+				>
+					<iconify-icon icon="ic:outline-home" width="18" height="18" class="align-sub" />
+					Home</a
 				> page. Once uploaded, the application will generate charts and tables based on the data contained
-				within the HAR file.
+				within the HAR file. To analyze a new file, refresh the page.
 			</p>
 		</section>
 		<section class="space-y-5">
