@@ -14,15 +14,26 @@
 			reader.onload = (e) => {
 				const contents = e.target?.result as string;
 
-				const harData = JSON.parse(contents as string);
+				try {
+					const harData = JSON.parse(contents as string);
 
-				const harEntries = harData.log.entries;
+					const harEntries = harData.log.entries;
 
-				dispatch('change', { error: false, entries: harEntries });
+					dispatch('change', { error: false, entries: harEntries });
+				} catch (error) {
+					dispatch('change', {
+						error: true,
+						message:
+							'There was an error reading the HAR file. Make sure it is in the valid format and try again.'
+					});
+				}
 			};
 			reader.readAsText(file);
 		} else {
-			dispatch('change', { error: true });
+			dispatch('change', {
+				error: true,
+				message: 'Whoops! Something went wrong. Please try again.'
+			});
 		}
 	}
 </script>

@@ -5,11 +5,13 @@
 	import type { HarEntry } from '$lib/types/HarEntry';
 
 	let uploadError: boolean;
+	let errorMessage: string;
 	let entries: HarEntry[] | undefined;
 
 	function onUpload(event: CustomEvent) {
 		uploadError = event.detail.error;
 		entries = event.detail.entries;
+		errorMessage = event.detail.message;
 
 		console.log(entries);
 	}
@@ -22,7 +24,7 @@
 		<aside class="alert variant-filled-error">
 			<div class="alert-message">
 				<h6 class="font-bold">Error!</h6>
-				<p>Something went wrong, please try again.</p>
+				<p>{errorMessage}</p>
 			</div>
 		</aside>
 	</div>
