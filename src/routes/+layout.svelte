@@ -7,9 +7,17 @@
 	import '../app.postcss';
 	import 'iconify-icon';
 
-	import { AppBar, AppRail, AppRailTile, AppShell, LightSwitch } from '@skeletonlabs/skeleton';
+	import {
+		AppBar,
+		AppRail,
+		AppRailAnchor,
+		AppRailTile,
+		AppShell,
+		LightSwitch
+	} from '@skeletonlabs/skeleton';
 	import { writable, type Writable } from 'svelte/store';
 	import PageFooter from '$lib/components/PageFooter.svelte';
+	import { page } from '$app/stores';
 
 	const storeValue: Writable<number | null> = writable(0);
 </script>
@@ -39,13 +47,19 @@
 		>
 			<!-- Left Sidebar Content -->
 			<!-- * Home * -->
-			<AppRailTile label="Home" value={0} tag="a" href="/">
-				<iconify-icon icon="ic:outline-home" width="32" height="32" />
-			</AppRailTile>
+			<AppRailAnchor title="Home" href="/" selected={$page.url.pathname === '/'}>
+				<svelte:fragment slot="lead">
+					<iconify-icon icon="ic:outline-home" width="32" height="32" />
+				</svelte:fragment>
+				<span>Home</span>
+			</AppRailAnchor>
 			<!-- * Guide * -->
-			<AppRailTile label="Guide" value={2} tag="a" href="/guide"
-				><iconify-icon icon="solar:book-bookmark-linear" width="32" height="32" /></AppRailTile
-			>
+			<AppRailAnchor title="Guide" href="/guide" selected={$page.url.pathname === '/guide'}>
+				<svelte:fragment slot="lead"
+					><iconify-icon icon="solar:book-bookmark-linear" width="32" height="32" />
+				</svelte:fragment>
+				<span>Guide</span>
+			</AppRailAnchor>
 		</AppRail>
 	</svelte:fragment>
 
